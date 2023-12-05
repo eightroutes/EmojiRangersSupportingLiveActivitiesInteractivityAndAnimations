@@ -19,23 +19,25 @@ extension AdventureViewModel {
             eventDescription: "Adventure has begun!"
         )
         
-        let activity = try Activity.request(
-            attributes: adventure,
-            content: .init(state: initialState, staleDate: nil),
-            pushType: .token
-        )
-        
-//        let pushToken = activity.pushToken // Returns nil.
-        
-        Task {
-            for await pushToken in activity.pushTokenUpdates {
-                let pushTokenString = pushToken.reduce("") {
-                    $0 + String(format: "%02x", $1)
+        if ActivityAuthorizationInfo().areActivitiesEnabled {
+            let activity = try Activity.request(
+                attributes: adventure,
+                content: .init(state: initialState, staleDate: nil),
+                pushType: .token
+            )
+            
+            //        let pushToken = activity.pushToken // Returns nil.
+            
+            Task {
+                for await pushToken in activity.pushTokenUpdates {
+                    let pushTokenString = pushToken.reduce("") {
+                        $0 + String(format: "%02x", $1)
+                    }
+                    
+                    Logger().log("New push token: \(pushTokenString)")
+                    
+                    try await self.sendPushToken(hero: hero, pushTokenString: pushTokenString)
                 }
-                
-                Logger().log("New push token: \(pushTokenString)")
-                
-                try await self.sendPushToken(hero: hero, pushTokenString: pushTokenString)
             }
         }
     }
@@ -71,6 +73,7 @@ extension AdventureViewModel {
     }
     
     func observeActivityUpdates(_ activity: Activity<AdventureAttributes>) {
+        // Observe updates for ongoing Live Activities.
         Task {
             for await content in activity.contentUpdates {
                 self.updateAdventureView(content: content)

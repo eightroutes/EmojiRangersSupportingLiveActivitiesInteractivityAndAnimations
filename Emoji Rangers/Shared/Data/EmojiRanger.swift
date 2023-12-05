@@ -61,7 +61,7 @@ struct EmojiRanger: Hashable, Codable, Identifiable {
     static let spouty = EmojiRanger(
         name: "Spouty",
         avatar: "🐳",
-        healthLevel: 0.99,
+        healthLevel: 0.42,
         heroType: "Deep Sea Goer",
         healthRecoveryRatePerHour: 0.59,
         url: URL(string: "game:///spouty")!,

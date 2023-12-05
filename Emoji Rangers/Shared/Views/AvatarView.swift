@@ -19,6 +19,7 @@ struct Avatar: View {
                 .font(.system(size: 500))
                 .minimumScaleFactor(0.01)
                 .multilineTextAlignment(.center)
+                .padding(2)
         }
         .aspectRatio(1, contentMode: .fit)
         .frame(maxWidth: 50)

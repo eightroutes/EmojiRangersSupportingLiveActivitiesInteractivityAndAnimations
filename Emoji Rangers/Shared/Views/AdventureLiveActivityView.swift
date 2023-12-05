@@ -22,7 +22,7 @@ struct AdventureLiveActivityContent: View {
                 
                 Spacer()
                 
-                StatsView(hero: hero, isStale: isStale)
+                OneLineStatsView(hero: hero, isStale: isStale)
             }
             
             HealthBar(currentHealthLevel: contentState.currentHealthLevel)
@@ -45,10 +45,6 @@ struct AdventureLiveActivityView: View {
             contentState: contentState
         )
         .padding()
-        .background(
-            ContainerRelativeShape()
-                .fill(Color.liveActivityBackground)
-        )
     }
 }
 
@@ -108,7 +104,7 @@ struct EventDescriptionView: View {
     }
 }
 
-struct StatsView: View {
+struct OneLineStatsView: View {
     
     let hero: EmojiRanger
     let isStale: Bool
@@ -126,6 +122,27 @@ struct StatsView: View {
         .font(.caption)
         .multilineTextAlignment(.center)
         .frame(height: 30)
+    }
+}
+
+struct TwoLineStatsView: View {
+    
+    let hero: EmojiRanger
+    let isStale: Bool
+    
+    var body: some View {
+        Group {
+            if isStale {
+                Text("Outdated \(Image(systemName: "clock.badge.exclamationmark.fill")) ")
+                    .padding(4)
+                    .background(ContainerRelativeShape().fill(Color.red))
+            } else {
+                Text("Level: \(hero.level)")
+                    .padding([.trailing], 4)
+                Text("XP: \(hero.exp)")
+            }
+        }
+        .font(.caption)
     }
 }
 

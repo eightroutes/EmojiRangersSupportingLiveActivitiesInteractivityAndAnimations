@@ -170,28 +170,31 @@ final class AdventureViewModel: ObservableObject {
     }
     
     func startAdventureButtonTapped(hero: EmojiRanger) {
-        do {
-            let adventure = AdventureAttributes(hero: hero)
-            let initialState = AdventureAttributes.ContentState(
-                currentHealthLevel: hero.healthLevel,
-                eventDescription: "Adventure has begun!"
-            )
-            
-            let activity = try Activity.request(
-                attributes: adventure,
-                content: .init(state: initialState, staleDate: nil),
-                pushType: .token
-            )
-            
-            self.setup(withActivity: activity)
-        } catch {
-            errorMessage = """
-            Couldn't start activity
-            ------------------------
-            \(String(describing: error))
-            """
-            
-            self.errorMessage = errorMessage
+        
+        if ActivityAuthorizationInfo().areActivitiesEnabled {
+            do {
+                let adventure = AdventureAttributes(hero: hero)
+                let initialState = AdventureAttributes.ContentState(
+                    currentHealthLevel: hero.healthLevel,
+                    eventDescription: "Adventure has begun!"
+                )
+                
+                let activity = try Activity.request(
+                    attributes: adventure,
+                    content: .init(state: initialState, staleDate: nil),
+                    pushType: .token
+                )
+                
+                self.setup(withActivity: activity)
+            } catch {
+                errorMessage = """
+                    Couldn't start activity
+                    ------------------------
+                    \(String(describing: error))
+                    """
+                
+                self.errorMessage = errorMessage
+            }
         }
     }
     

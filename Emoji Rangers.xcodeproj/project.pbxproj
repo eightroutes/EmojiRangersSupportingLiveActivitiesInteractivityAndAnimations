@@ -9,11 +9,9 @@
 /* Begin PBXBuildFile section */
 		0F3AB88C2A01B3220001A5DB /* EmojiRangerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3AB88B2A01B3220001A5DB /* EmojiRangerSelection.swift */; };
 		0F3AB88D2A01B3220001A5DB /* EmojiRangerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3AB88B2A01B3220001A5DB /* EmojiRangerSelection.swift */; };
-		0F3AB8902A01B7470001A5DB /* EmojiRangerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3AB88B2A01B3220001A5DB /* EmojiRangerSelection.swift */; };
 		0F3AB8912A01B7480001A5DB /* EmojiRangerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3AB88B2A01B3220001A5DB /* EmojiRangerSelection.swift */; };
 		0F9003652A059DC400B4B946 /* SuperCharge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9003642A059DC400B4B946 /* SuperCharge.swift */; };
 		0F9003662A059DC400B4B946 /* SuperCharge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9003642A059DC400B4B946 /* SuperCharge.swift */; };
-		0F9003672A059DC400B4B946 /* SuperCharge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9003642A059DC400B4B946 /* SuperCharge.swift */; };
 		0F9003682A059DC400B4B946 /* SuperCharge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9003642A059DC400B4B946 /* SuperCharge.swift */; };
 		0FAD0CAB2A2806E300BB951F /* WatchIntentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAD0CA92A28068300BB951F /* WatchIntentProvider.swift */; };
 		0FAD0CAC2A2806E400BB951F /* WatchIntentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FAD0CA92A28068300BB951F /* WatchIntentProvider.swift */; };
@@ -746,8 +744,6 @@
 			files = (
 				344C105829F1C6FC0075E3DA /* AdventureLiveActivityView.swift in Sources */,
 				1F7D0F3429F1429A00AB9D92 /* IntentHandler.swift in Sources */,
-				0F3AB8902A01B7470001A5DB /* EmojiRangerSelection.swift in Sources */,
-				0F9003672A059DC400B4B946 /* SuperCharge.swift in Sources */,
 				344C105029F1BCAB0075E3DA /* AdventureAttributes.swift in Sources */,
 				1F7D0F3F29F142C600AB9D92 /* HeroNameView.swift in Sources */,
 				1F7D0F4329F142C900AB9D92 /* EmojiRanger.swift in Sources */,
@@ -983,7 +979,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Emoji-Rangers${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.bscholtysik${SAMPLE_CODE_DISAMBIGUATOR}.Emoji-Rangers";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1019,7 +1015,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Emoji-Rangers${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.bscholtysik${SAMPLE_CODE_DISAMBIGUATOR}.Emoji-Rangers";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1049,7 +1045,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Emoji-Rangers${SAMPLE_CODE_DISAMBIGUATOR}.Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.bscholtysik${SAMPLE_CODE_DISAMBIGUATOR}.Emoji-Rangers.Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1080,7 +1076,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Emoji-Rangers${SAMPLE_CODE_DISAMBIGUATOR}.Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.bscholtysik${SAMPLE_CODE_DISAMBIGUATOR}.Emoji-Rangers.Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1109,7 +1105,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Emoji-Rangers${SAMPLE_CODE_DISAMBIGUATOR}.EmojiRangersIntents";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.bscholtysik${SAMPLE_CODE_DISAMBIGUATOR}.Emoji-Rangers.EmojiRangersIntents";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1138,7 +1134,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Emoji-Rangers${SAMPLE_CODE_DISAMBIGUATOR}.EmojiRangersIntents";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.bscholtysik${SAMPLE_CODE_DISAMBIGUATOR}.Emoji-Rangers.EmojiRangersIntents";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -1170,7 +1166,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Emoji-Rangers${SAMPLE_CODE_DISAMBIGUATOR}.Emoji-Rangers.EmojiRangersWatch.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.bscholtysik${SAMPLE_CODE_DISAMBIGUATOR}.Emoji-Rangers.Emoji-Rangers.EmojiRangersWatch.watchkitapp";
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=watchos*]" = "com.example.apple-samplecode.Emoji-Rangers.EmojiRangersWatch.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1205,7 +1201,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Emoji-Rangers${SAMPLE_CODE_DISAMBIGUATOR}.Emoji-Rangers.EmojiRangersWatch.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.bscholtysik${SAMPLE_CODE_DISAMBIGUATOR}.Emoji-Rangers.Emoji-Rangers.EmojiRangersWatch.watchkitapp";
 				"PRODUCT_BUNDLE_IDENTIFIER[sdk=watchos*]" = "com.example.apple-samplecode.Emoji-Rangers.EmojiRangersWatch.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1230,7 +1226,7 @@
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = EmojiRangersWatch;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Emoji-Rangers${SAMPLE_CODE_DISAMBIGUATOR}.EmojiRangersWatch";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.bscholtysik${SAMPLE_CODE_DISAMBIGUATOR}.Emoji-Rangers.EmojiRangersWatch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EmojiRangersWatch-Bridging-Header.h";
@@ -1251,7 +1247,7 @@
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = EmojiRangersWatch;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Emoji-Rangers${SAMPLE_CODE_DISAMBIGUATOR}.EmojiRangersWatch";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.bscholtysik${SAMPLE_CODE_DISAMBIGUATOR}.Emoji-Rangers.EmojiRangersWatch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EmojiRangersWatch-Bridging-Header.h";
@@ -1281,7 +1277,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Emoji-Rangers${SAMPLE_CODE_DISAMBIGUATOR}.EmojiRangersWatch.watchkitapp.EmojiRangersWidgetWatch";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.bscholtysik${SAMPLE_CODE_DISAMBIGUATOR}.Emoji-Rangers.EmojiRangersWatch.watchkitapp.EmojiRangersWidgetWatch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;
@@ -1315,7 +1311,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.Emoji-Rangers${SAMPLE_CODE_DISAMBIGUATOR}.EmojiRangersWatch.watchkitapp.EmojiRangersWidgetWatch";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.bscholtysik${SAMPLE_CODE_DISAMBIGUATOR}.Emoji-Rangers.EmojiRangersWatch.watchkitapp.EmojiRangersWidgetWatch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = watchos;

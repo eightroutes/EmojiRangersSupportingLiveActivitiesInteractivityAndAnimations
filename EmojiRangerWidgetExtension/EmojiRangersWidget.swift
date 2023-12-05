@@ -52,6 +52,7 @@ struct EmojiRangerWidgetEntryView: View {
                 Avatar(hero: entry.hero, includeBackground: false)
             })
             .progressViewStyle(.circular)
+            .widgetBackground()
             
         case .accessoryRectangular:
             HStack(alignment: .center, spacing: 0) {
@@ -72,6 +73,7 @@ struct EmojiRangerWidgetEntryView: View {
                 Text("\(entry.hero.name) ready in \(entry.hero.fullHealthDate, style: .relative)")
                 Text("\(entry.hero.name) \(entry.hero.fullHealthDate, style: .timer)")
             }
+            .widgetBackground()
             
         case .systemSmall:
             AvatarView(entry.hero)
