@@ -16,7 +16,8 @@ extension AdventureViewModel {
         let adventure = AdventureAttributes(hero: hero)
         let initialState = AdventureAttributes.ContentState(
             currentHealthLevel: hero.healthLevel,
-            eventDescription: "Adventure has begun!"
+            eventDescription: "Adventure has begun!",
+            supercharged: EmojiRanger.herosAreSupercharged()
         )
         
         if ActivityAuthorizationInfo().areActivitiesEnabled {
@@ -45,7 +46,8 @@ extension AdventureViewModel {
     func printEncoded() {
         let contentState = AdventureAttributes.ContentState(
             currentHealthLevel: 0.941,
-            eventDescription: "Power Panda found a sword!"
+            eventDescription: "Power Panda found a sword!",
+            supercharged: EmojiRanger.herosAreSupercharged()
         )
         
         let encoder = JSONEncoder()

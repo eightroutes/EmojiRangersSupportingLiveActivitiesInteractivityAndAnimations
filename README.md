@@ -1,6 +1,6 @@
 # Emoji Rangers: Supporting Live Activities, interactivity, and animations
 
-Offer Live Activities, animate data updates, and add interactivity to widgets.
+Offer Live Activities, controls, animate data updates, and add interactivity to widgets.
 
 ## Overview
 

@@ -9,8 +9,9 @@ import Foundation
 import AppIntents
 import WidgetKit
 
-@available(iOS 16.0, macOS 13.0, watchOS 9.0, tvOS 16.0, *)
-struct SuperCharge: AppIntent {
+#if os(iOS) || os(macOS) || targetEnvironment(macCatalyst)
+
+struct SuperCharge: AppIntent, ControlConfigurationIntent {
     
     static var title: LocalizedStringResource = "Emoji Ranger SuperCharger"
     static var description = IntentDescription("All heroes get instant 100% health.")
@@ -20,3 +21,5 @@ struct SuperCharge: AppIntent {
         return .result()
     }
 }
+
+#endif

@@ -146,4 +146,9 @@ struct TwoLineStatsView: View {
     }
 }
 
+#Preview {
+    AdventureLiveActivityView(hero: .panda, isStale: false, contentState:
+            .init(currentHealthLevel: 0.5, eventDescription: "sampple description", supercharged: false))
+}
+
 #endif

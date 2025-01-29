@@ -10,9 +10,9 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         List {
-            TableRow(hero: .panda)
-            TableRow(hero: .spouty)
-            TableRow(hero: .egghead)
+            ForEach(EmojiRanger.allHeros) { hero in
+                TableRow(hero: hero)
+            }
         }
     }
 }
@@ -28,8 +28,6 @@ struct TableRow: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+#Preview {
+    ContentView()
 }

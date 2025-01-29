@@ -56,7 +56,7 @@ struct DetailView: View {
                             .fill(Color.gameBackground))
                 }
                 .padding()
-                .foregroundColor(.white)
+                .foregroundStyle(.white)
             }
             Divider()
             AdventureView(hero: hero)
@@ -64,8 +64,6 @@ struct DetailView: View {
     }
 }
 
-struct DetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailView(hero: .spouty)
-    }
+#Preview {
+    DetailView(hero: .spouty)
 }

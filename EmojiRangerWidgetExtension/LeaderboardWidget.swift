@@ -13,27 +13,23 @@ struct LeaderboardProvider: TimelineProvider {
     public typealias Entry = LeaderboardEntry
     
     func placeholder(in context: Context) -> LeaderboardEntry {
-        return LeaderboardEntry(date: Date(), heros: EmojiRanger.availableHeros)
+        return LeaderboardEntry(date: Date(), heros: EmojiRanger.allHeros)
     }
     
     func getSnapshot(in context: Context, completion: @escaping (LeaderboardEntry) -> Void) {
-        let entry = LeaderboardEntry(date: Date(), heros: EmojiRanger.availableHeros)
-        completion(entry)
+        completion(LeaderboardEntry(date: Date(), heros: EmojiRanger.allHeros))
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<LeaderboardEntry>) -> Void) {
-        EmojiRanger.loadLeaderboardData { (heros, error) in
-            guard let heros = heros else {
-                let timeline = Timeline(entries: [LeaderboardEntry(date: Date(), heros: EmojiRanger.availableHeros)], policy: .atEnd)
-                
-                completion(timeline)
-                
+        Task {
+            guard let heros = await EmojiRanger.loadLeaderboardData() else {
+                completion(Timeline(entries: [LeaderboardEntry(date: Date(), heros: EmojiRanger.allHeros)], policy: .atEnd))
                 return
             }
-            let timeline = Timeline(entries: [LeaderboardEntry(date: Date(), heros: heros)], policy: .atEnd)
-            completion(timeline)
+            completion(Timeline(entries: [LeaderboardEntry(date: Date(), heros: heros)], policy: .atEnd))
         }
     }
+    
 }
 
 struct LeaderboardEntry: TimelineEntry {
@@ -60,15 +56,7 @@ struct LeaderboardWidgetEntryView: View {
 struct LeaderboardWidget: Widget {
     
     private static var supportedFamilies: [WidgetFamily] {
-#if os(iOS)
-        if #available(iOS 15, *) {
-            return [.systemLarge, .systemExtraLarge]
-        } else {
-            return [.systemLarge]
-        }
-#else
-        return []
-#endif
+        return [.systemLarge, .systemExtraLarge]
     }
     
     public var body: some WidgetConfiguration {
@@ -81,13 +69,11 @@ struct LeaderboardWidget: Widget {
     }
 }
 
-struct LeaderboardWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
 #if os(iOS)
-            LeaderboardWidgetEntryView(entry: LeaderboardEntry(date: Date(), heros: nil))
-                .previewContext(WidgetPreviewContext(family: .systemLarge))
+
+#Preview("Leaderboard", as: .systemLarge, widget: {
+    LeaderboardWidget()
+}, timeline: {
+    LeaderboardEntry(date: Date(), heros: nil)
+})
 #endif
-        }
-    }
-}

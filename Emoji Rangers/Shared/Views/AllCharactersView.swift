@@ -10,8 +10,8 @@ struct AllCharactersView: View {
     
     let heros: [EmojiRanger]
     
-    init(heros: [EmojiRanger]? = EmojiRanger.availableHeros) {
-        self.heros = heros ?? EmojiRanger.availableHeros
+    init(heros: [EmojiRanger]? = EmojiRanger.allHeros) {
+        self.heros = heros ?? EmojiRanger.allHeros
     }
     
     var body: some View {
@@ -23,21 +23,23 @@ struct AllCharactersView: View {
                         VStack(alignment: .leading) {
                             Text(hero.name)
                                 .font(.headline)
-                                .foregroundColor(.white)
+                                .foregroundStyle(.white)
                             Text("Level \(hero.level)")
-                                .foregroundColor(.white)
+                                .foregroundStyle(.white)
                             HealthLevelShape(level: hero.healthLevel)
                                 .frame(height: 10)
                         }
                     }
                 }
+                .padding()
             }
+        }
+        .background {
+            Color.gameBackgroundColor
         }
     }
 }
 
-struct AllCharactersView_Previews: PreviewProvider {
-    static var previews: some View {
-        AllCharactersView()
-    }
+#Preview {
+    AllCharactersView(heros: nil)
 }

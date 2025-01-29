@@ -13,6 +13,7 @@ struct AdventureAttributes: ActivityAttributes {
     struct ContentState: Codable & Hashable {
         let currentHealthLevel: Double
         let eventDescription: String
+        let supercharged: Bool
     }
     
     let hero: EmojiRanger

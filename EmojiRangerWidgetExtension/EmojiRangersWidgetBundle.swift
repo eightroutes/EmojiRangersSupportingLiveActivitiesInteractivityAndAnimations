@@ -12,7 +12,10 @@ import SwiftUI
 struct EmojiRangersWidgetBundle: WidgetBundle {
     var body: some Widget {
         EmojiRangerWidget()
+#if os(iOS) || os(macOS) || targetEnvironment(macCatalyst)
+        EmojiRangerControl()
         LeaderboardWidget()
+#endif
 #if canImport(ActivityKit)
         AdventureActivityConfiguration()
 #endif

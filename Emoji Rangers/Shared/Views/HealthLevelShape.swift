@@ -8,7 +8,7 @@ import SwiftUI
 
 struct HealthLevelShape: View {
     var level: Double
-    @AppStorage("supercharged", store: UserDefaults(suiteName: EmojiRanger.appGroup))
+    @AppStorage("supercharged", store: EmojiRanger.emojiDefaults)
     var supercharged: Bool = EmojiRanger.herosAreSupercharged()
     
     var body: some View {
@@ -26,9 +26,6 @@ struct HealthLevelShape: View {
     }
 }
 
-struct HealthLevelShape_Previews: PreviewProvider {
-    static var previews: some View {
-        HealthLevelShape(level: 0.5)
-            .previewLayout(.fixed(width: 160, height: 20))
-    }
+#Preview(traits: .fixedLayout(width: 160, height: 20)) {
+    HealthLevelShape(level: 0.8, supercharged: false)
 }

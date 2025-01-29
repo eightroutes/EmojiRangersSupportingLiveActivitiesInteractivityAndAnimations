@@ -107,10 +107,8 @@ struct AdventureView: View {
     }
 }
 
-struct AdventureView_Previews: PreviewProvider {
-    static var previews: some View {
-        AdventureView(hero: .spouty)
-    }
+#Preview {
+    AdventureView(hero: .spouty)
 }
 
 import ActivityKit
@@ -176,7 +174,8 @@ final class AdventureViewModel: ObservableObject {
                 let adventure = AdventureAttributes(hero: hero)
                 let initialState = AdventureAttributes.ContentState(
                     currentHealthLevel: hero.healthLevel,
-                    eventDescription: "Adventure has begun!"
+                    eventDescription: "Adventure has begun!",
+                    supercharged: EmojiRanger.herosAreSupercharged()
                 )
                 
                 let activity = try Activity.request(
@@ -227,7 +226,8 @@ private extension AdventureViewModel {
         
         let finalContent = AdventureAttributes.ContentState(
             currentHealthLevel: 1.0,
-            eventDescription: "Adventure over! \(hero.name) is taking a nap."
+            eventDescription: "Adventure over! \(hero.name) is taking a nap.",
+            supercharged: EmojiRanger.herosAreSupercharged()
         )
         
         let dismissalPolicy: ActivityUIDismissalPolicy
@@ -321,12 +321,14 @@ private extension AdventureViewModel {
             
             contentState = AdventureAttributes.ContentState(
                 currentHealthLevel: 0,
-                eventDescription: "\(heroName) has been knocked down!"
+                eventDescription: "\(heroName) has been knocked down!",
+                supercharged: EmojiRanger.herosAreSupercharged()
             )
         } else {
             contentState = AdventureAttributes.ContentState(
                 currentHealthLevel: Double.random(in: 0...1),
-                eventDescription: self.getEventDescription(hero: activity.attributes.hero)
+                eventDescription: self.getEventDescription(hero: activity.attributes.hero),
+                supercharged: EmojiRanger.herosAreSupercharged()
             )
         }
         

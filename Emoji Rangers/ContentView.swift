@@ -14,14 +14,14 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack(path: $navigationPath) {
-            List(EmojiRanger.availableHeros, id: \.self) { hero in
+            List(EmojiRanger.allHeros, id: \.self) { hero in
                 NavigationLink(value: hero) {
                     TableRow(hero: hero)
                 }
             }
             .onAppear {
                 // Check for the most recently selected character.
-                if let hero = EmojiRanger.getLastSelectedHero() {
+                if let hero = try? EmojiRanger.getLastSelectedHero() {
                     print("Last character selection: \(hero)")
                 }
             }
@@ -51,8 +51,6 @@ private struct TableRow: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+#Preview {
+    ContentView()
 }

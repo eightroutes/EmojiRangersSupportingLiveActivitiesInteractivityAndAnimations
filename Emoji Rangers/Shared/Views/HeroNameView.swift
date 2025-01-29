@@ -31,3 +31,7 @@ struct HeroNameView: View {
         }
     }
 }
+
+#Preview {
+    HeroNameView(nil, includeDetail: true)
+}

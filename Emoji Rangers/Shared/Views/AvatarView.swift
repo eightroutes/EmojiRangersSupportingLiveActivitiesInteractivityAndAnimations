@@ -26,21 +26,11 @@ struct Avatar: View {
     }
 }
 
-extension View {
-    func invalidatableContentIfPossible() -> some View {
-        if #available(iOS 17.0, *) {
-            return invalidatableContent()
-        } else {
-            return self
-        }
-    }
-}
-
 struct AvatarView: View {
     var hero: EmojiRanger
     @Environment(\.showsWidgetContainerBackground) var showsWidgetBackground
     @Environment(\.widgetRenderingMode) var renderingMode
-    @AppStorage("supercharged", store: UserDefaults(suiteName: EmojiRanger.appGroup))
+    @AppStorage("supercharged", store: EmojiRanger.emojiDefaults)
     var supercharged: Bool = EmojiRanger.herosAreSupercharged()
     
     init(_ hero: EmojiRanger) {
@@ -80,17 +70,16 @@ struct AvatarView: View {
                             .minimumScaleFactor(0.25)
                     }
                 }
-                .invalidatableContentIfPossible()
+                .invalidatableContent()
+            }
+            .foregroundStyle(Color.white)
+            .background {
+                Color.gameBackgroundColor
             }
         }
     }
 }
 
-struct AvatarView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            AvatarView(EmojiRanger.spouty)
-                .previewLayout(.fixed(width: 160, height: 160))
-        }
-    }
+#Preview(traits: .fixedLayout(width: 160, height: 160)) {
+    AvatarView(EmojiRanger.spouty)
 }

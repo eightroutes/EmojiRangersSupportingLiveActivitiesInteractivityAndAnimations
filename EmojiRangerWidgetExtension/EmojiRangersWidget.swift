@@ -8,6 +8,21 @@ A widget that shows the avatar for a single hero.
 import WidgetKit
 import SwiftUI
 
+#if os(iOS) || os(macOS) || targetEnvironment(macCatalyst)
+
+@available(iOSApplicationExtension 18.0, *)
+struct EmojiRangerControl: ControlWidget {
+    var body: some ControlWidgetConfiguration {
+        AppIntentControlConfiguration(kind: "com.emoji-rangers.control", intent: SuperCharge.self) { config in
+            ControlWidgetButton(action: config) {
+                Image(systemName: "bolt\(EmojiRanger.herosAreSupercharged() ? ".fill" : "")")
+            }
+        }
+    }
+}
+
+#endif
+
 struct SimpleEntry: TimelineEntry {
     public let date: Date
     let relevance: TimelineEntryRelevance?
@@ -21,16 +36,16 @@ struct PlaceholderView: View {
 }
 
 extension View {
-     func widgetBackground() -> some View {
-         if #available(iOSApplicationExtension 17.0, *) {
-             return containerBackground(for: .widget) {
-                 Color.gameBackgroundColor
-             }
-         } else {
-             return background {
-                 Color.gameBackgroundColor
-             }
-         }
+    func widgetBackground() -> some View {
+        if #available(iOSApplicationExtension 17.0, *) {
+            return containerBackground(for: .widget) {
+                Color.gameBackgroundColor
+            }
+        } else {
+            return background {
+                Color.gameBackgroundColor
+            }
+        }
     }
 }
 
@@ -39,7 +54,7 @@ struct EmojiRangerWidgetEntryView: View {
     
     @Environment(\.widgetFamily) var family
     
-    @AppStorage("supercharged", store: UserDefaults(suiteName: EmojiRanger.appGroup))
+    @AppStorage("supercharged", store: EmojiRanger.emojiDefaults)
     var supercharged: Bool = EmojiRanger.herosAreSupercharged()
     
     var body: some View {
@@ -77,8 +92,7 @@ struct EmojiRangerWidgetEntryView: View {
             
         case .systemSmall:
             AvatarView(entry.hero)
-                .widgetURL(entry.hero.url)
-                .foregroundColor(.white)
+                .foregroundStyle(.white)
                 .widgetBackground()
                 .widgetURL(entry.hero.url)
             
@@ -86,17 +100,15 @@ struct EmojiRangerWidgetEntryView: View {
             VStack {
                 HStack(alignment: .top) {
                     AvatarView(entry.hero)
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                     Text(entry.hero.bio)
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                 }
                 .padding()
-#if os(iOS)
-                if #available(iOSApplicationExtension 17.0, *) {
-                    Button(intent: SuperCharge()) {
-                        Text("⚡️")
-                            .lineLimit(1)
-                    }
+#if os(iOS) || os(macOS) || targetEnvironment(macCatalyst)
+                Button(intent: SuperCharge()) {
+                    Text("⚡️")
+                        .lineLimit(1)
                 }
 #endif
             }
@@ -105,9 +117,9 @@ struct EmojiRangerWidgetEntryView: View {
         case .systemMedium:
             HStack(alignment: .top) {
                 AvatarView(entry.hero)
-                    .foregroundColor(.white)
+                    .foregroundStyle(.white)
                 Text(entry.hero.bio)
-                    .foregroundColor(.white)
+                    .foregroundStyle(.white)
             }
             .widgetBackground()
             .widgetURL(entry.hero.url)
@@ -122,28 +134,19 @@ struct EmojiRangerWidget: Widget {
     
     func makeWidgetConfiguration() -> some WidgetConfiguration {
 #if os(watchOS)
-        return IntentConfiguration(kind: EmojiRanger.EmojiRangerWidgetKind,
-                                   intent: EmojiRangerSelectionIntent.self,
-                                   provider: SiriKitWatchIntentProvider()) { entry in
+        return AppIntentConfiguration(kind: EmojiRanger.EmojiRangerWidgetKind,
+                                      intent: EmojiRangerSelection.self,
+                                      provider: AppIntentProvider()) { entry in
             EmojiRangerWidgetEntryView(entry: entry)
         }
-                                   .supportedFamilies(supportedFamilies)
+                                      .supportedFamilies(supportedFamilies)
 #else
-        if #available(iOS 17.0, macOS 14.0, *) {
-            return AppIntentConfiguration(kind: EmojiRanger.EmojiRangerWidgetKind,
-                                          intent: EmojiRangerSelection.self,
-                                          provider: AppIntentProvider()) { entry in
-                EmojiRangerWidgetEntryView(entry: entry)
-            }
-                                          .supportedFamilies(supportedFamilies)
-        } else {
-            return IntentConfiguration(kind: EmojiRanger.EmojiRangerWidgetKind,
-                                       intent: EmojiRangerSelectionIntent.self,
-                                       provider: SiriKitIntentProvider()) { entry in
-                EmojiRangerWidgetEntryView(entry: entry)
-            }
-                                       .supportedFamilies(supportedFamilies)
+        return AppIntentConfiguration(kind: EmojiRanger.EmojiRangerWidgetKind,
+                                      intent: EmojiRangerSelection.self,
+                                      provider: AppIntentProvider()) { entry in
+            EmojiRangerWidgetEntryView(entry: entry)
         }
+                                      .supportedFamilies(supportedFamilies)
 #endif
     }
     
@@ -165,27 +168,12 @@ struct EmojiRangerWidget: Widget {
     }
 }
 
-struct Widget_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            EmojiRangerWidgetEntryView(entry: SimpleEntry(date: Date(), relevance: nil, hero: .spouty))
-                .previewContext(WidgetPreviewContext(family: .accessoryCircular))
-                .previewDisplayName("Circular")
-            
-            EmojiRangerWidgetEntryView(entry: SimpleEntry(date: Date(), relevance: nil, hero: .spouty))
-                .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
-                .previewDisplayName("Rectangular")
-            EmojiRangerWidgetEntryView(entry: SimpleEntry(date: Date(), relevance: nil, hero: .spouty))
-                .previewContext(WidgetPreviewContext(family: .accessoryInline))
-                .previewDisplayName("Inline")
-            
-#if os(iOS)
-            
-            EmojiRangerWidgetEntryView(entry: SimpleEntry(date: Date(), relevance: nil, hero: .spouty))
-                .previewContext(WidgetPreviewContext(family: .systemSmall))
-            EmojiRangerWidgetEntryView(entry: SimpleEntry(date: Date(), relevance: nil, hero: .spouty))
-                .previewContext(WidgetPreviewContext(family: .systemMedium))
+#if os(iOS) || os(macOS) || targetEnvironment(macCatalyst)
+#Preview(as: .systemMedium, widget: {
+    EmojiRangerWidget()
+}, timeline: {
+    let date = Date()
+    SimpleEntry(date: date, relevance: nil, hero: .spouty)
+    SimpleEntry(date: date.addingTimeInterval(60), relevance: nil, hero: .spook)
+})
 #endif
-        }
-    }
-}
