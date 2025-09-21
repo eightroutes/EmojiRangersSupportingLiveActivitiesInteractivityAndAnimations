@@ -259,6 +259,8 @@ private extension AdventureViewModel {
     func observeActivity(activity: Activity<AdventureAttributes>) {
         Task {
             await withTaskGroup(of: Void.self) { group in
+
+                // (1) Activity 상태 변경 감지
                 group.addTask { @MainActor in
                     for await activityState in activity.activityStateUpdates {
                         if activityState == .dismissed {
@@ -269,12 +271,14 @@ private extension AdventureViewModel {
                     }
                 }
                 
+                // (2) ContentState 변경 감지
                 group.addTask { @MainActor in
                     for await contentState in activity.contentUpdates {
                         self.activityViewState?.contentState = contentState.state
                     }
                 }
                 
+                // (3) PushToken 변경 감지
                 group.addTask { @MainActor in
                     for await pushToken in activity.pushTokenUpdates {
                         let pushTokenString = pushToken.hexadecimalString
@@ -302,6 +306,7 @@ private extension AdventureViewModel {
     
     func updateAdventure(alert: Bool) async throws {
         
+        // 2초 딜레이 (테스트 용)
         try await Task.sleep(for: .seconds(2))
         
         guard let activity = currentActivity else {
@@ -310,7 +315,8 @@ private extension AdventureViewModel {
         
         var alertConfig: AlertConfiguration? = nil
         let contentState: AdventureAttributes.ContentState
-        if alert {
+        
+        if alert { // Alert critical 클릭 시 - HP 0 ..
             let heroName = activity.attributes.hero.name
             
             alertConfig = AlertConfiguration(
@@ -324,7 +330,7 @@ private extension AdventureViewModel {
                 eventDescription: "\(heroName) has been knocked down!",
                 supercharged: EmojiRanger.herosAreSupercharged()
             )
-        } else {
+        } else { // Normal 클릭 시 - HP random ..
             contentState = AdventureAttributes.ContentState(
                 currentHealthLevel: Double.random(in: 0...1),
                 eventDescription: self.getEventDescription(hero: activity.attributes.hero),
@@ -373,6 +379,7 @@ extension AdventureViewModel {
 }
 
 private extension Data {
+    /// Data(바이트 배열)을 2자리의 16진수 문자열로 변환
     var hexadecimalString: String {
         self.reduce("") {
             $0 + String(format: "%02x", $1)
